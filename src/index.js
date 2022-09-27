@@ -21,13 +21,13 @@ function answerUser(answer) {
   switch (ANSWER_LOWER) {
     case constants.CREATE_NAME:
       readerCLI.question("input: ", function (jsonReceived) {
-        let result = account.createAccount(jsonReceived);
+        let result = account.createAccount(JSON.parse(jsonReceived));
         history.push(result);
         main();
       });
     case constants.TRANSACTION_NAME:
       readerCLI.question("input: ", function (jsonReceived) {
-        let result = transaction.execute(jsonReceived);
+        let result = transaction.execute(JSON.parse(jsonReceived));
         history.push(result);
         main();
       });

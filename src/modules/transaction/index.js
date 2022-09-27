@@ -25,4 +25,4 @@ function execute(transactionJson) {
   }
 }
 
-export { execute, transactionHistory };
+export { execute, transactionHistory};

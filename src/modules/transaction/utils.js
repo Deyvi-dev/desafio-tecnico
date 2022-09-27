@@ -1,7 +1,7 @@
 import moment from "moment";
 import * as account from "../account/index.js";
 import * as constants from "../../constants.js";
-
+import * as transactionJson from './index.js'
 function isDoubledTransaction(transactionCurrentJson) {
   transactionOld = transactionHistory.find((transactionOldJson) => {
     if (
@@ -38,10 +38,10 @@ function newCreditCardLimit(transactionCurrent) {
 
 function isValidTransactionContract() {
   if (
-    !accountJson.transaction ||
-    !accountJson.transaction.merchant ||
-    !accountJson.transaction.amount ||
-    !accountJson.transaction.time
+    !transactionJson.transaction ||
+    !transactionJson.transaction.merchant ||
+    !transactionJson.transaction.amount ||
+    !transactionJson.transaction.time
   ) {
     return false;
   }
