@@ -12,8 +12,8 @@ ou
 $ npm install
 
 # Execute a aplicação
-$ node main.js
-$ use os metodos creat transaction e exit
+$ node index.js
+$ use os metodos create transaction history e exit
 # para criação e transaçoes use essas linhas Json base
 
 {"account": {"active-card": true, "available-limit": 100}}
