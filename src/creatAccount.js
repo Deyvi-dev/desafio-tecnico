@@ -11,7 +11,8 @@ var resultAccount = null
     //caso exita o valor do active-card true?  cria um objeto copia e adiciona as violações da lógica de negócios.
    } else if(account.account['active-card'] === true){
      account = { ...resultAccount, violations: ["account-already-initialized"] }
-     return console.log(JSON.stringify(account))
+     console.log(JSON.stringify(account))     
+     return account
    }else{
      console.log("digite um json valido")
    }
