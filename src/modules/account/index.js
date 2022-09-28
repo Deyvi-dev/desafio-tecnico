@@ -5,6 +5,7 @@ var accountData = { status: false, account: null };
 
 function createAccount(accountJson) {
   if (accountData.status) {
+    accountData.account.violations = [...accountData.account.violations]
     accountData.account.violations.push(
       constants.ERROR_ACCOUNT_ALREADY_INITIALIZED
     );
