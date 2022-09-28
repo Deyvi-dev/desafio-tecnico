@@ -33,7 +33,6 @@ function hasCreditCardLimit(transactionCurrent) {
   let limitCurrent =
     account.accountData.account.account["available-limit"] -
     transactionCurrent.transaction.amount;
-  console.log("log1", transactionCurrent.transaction.amount)
   return limitCurrent > 0;
 }
 
@@ -41,7 +40,6 @@ function newCreditCardLimit(transactionCurrent) {
   let limitCurrent =
     account.accountData.account.account["available-limit"] -
     transactionCurrent.transaction.amount;
-  console.log("log2", account.accountData.account)
   return limitCurrent;
 }
 

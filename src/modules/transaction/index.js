@@ -7,13 +7,11 @@ function execute(transactionJson) {
   let transactionData = transactionJson;
   var  transactionERRO = {...account.accountData.account}
   if (utils.isValidTransactionContract(transactionJson)) {
-    console.log("ixxx")
     if (!utils.hasCreditCardLimit(transactionJson)) {
-      console.log("ue", transactionERRO.violations)
       transactionERRO.violations.push(constants.ERROR_NOT_LIMIT);
     } else {
       if (utils.isDoubledTransaction(transactionJson)) {
-        console.log('foi trueeeee::')
+       
         transactionERRO.violations.push(constants.ERROR_DOUBLED_TRANSACTION);
       } else {
         console.log("ue2",account.accountData.account.account["available-limit"])
@@ -22,8 +20,8 @@ function execute(transactionJson) {
       }
     }
 
-    transactionHistory.push(transactionData);
-    return transactionData;
+    transactionHistory.push({...transactionData});
+    return {...transactionData};
   } else {
     return constants.ERROR_INVALID_TRANSACTION_CONTRACT;
   }

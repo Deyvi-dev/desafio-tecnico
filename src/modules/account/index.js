@@ -22,7 +22,7 @@ function createAccount(accountJson) {
     accountData.status = true;
     accountJson.violations = [];
     accountData.account = accountJson;
-    return accountData.account;
+    return {...accountData.account};
   } else {
     return constants.ERROR_INVALID_ACCOUNT_CONTRACT;
   }
