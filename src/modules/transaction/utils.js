@@ -1,42 +1,51 @@
 import moment from "moment";
 import * as account from "../account/index.js";
 import * as constants from "../../constants.js";
-import * as transactionJson from './index.js'
+import { transactionHistory } from "./index.js";
+
 function isDoubledTransaction(transactionCurrentJson) {
-  transactionOld = transactionHistory.find((transactionOldJson) => {
+
+  var transactionOld = transactionHistory.find((transactionOldJson) => {
     if (
       transactionOldJson.transaction.merchant ===
-        transactionCurrentJson.transaction.merchant &&
+      transactionCurrentJson.transaction.merchant &&
       transactionOldJson.transaction.amount ===
-        transactionCurrentJson.transaction.amount
+      transactionCurrentJson.transaction.amount
     ) {
-      return transactionOldJson;
-    }
-  });
+      let transactionCurrentTime = moment(transactionCurrentJson.transaction.time);
+      let transactionOldTime = moment(transactionOldJson.transaction.time);
 
-  let transactionCurrentTime = moment(transactionCurrentJson.transaction.time);
-  let transactionOldTime = moment(transactionOld.transaction.time);
-  return (
-    transactionCurrentTime.diff(transactionOldTime) <=
-    constants.TIME_FOR_DOUBLED_TRANSACTION
-  );
+      // return true
+      if (transactionCurrentTime.diff(transactionOldTime) <= constants.TIME_FOR_DOUBLED_TRANSACTION) {
+        return true
+      }
+    }
+
+  })
+  return transactionOld
 }
+
+
+
+
 
 function hasCreditCardLimit(transactionCurrent) {
   let limitCurrent =
-    account.accountData.account["available-limit"] -
+    account.accountData.account.account["available-limit"] -
     transactionCurrent.transaction.amount;
+  console.log("log1", transactionCurrent.transaction.amount)
   return limitCurrent > 0;
 }
 
 function newCreditCardLimit(transactionCurrent) {
   let limitCurrent =
-    account.accountData.account["available-limit"] -
+    account.accountData.account.account["available-limit"] -
     transactionCurrent.transaction.amount;
+  console.log("log2", account.accountData.account)
   return limitCurrent;
 }
 
-function isValidTransactionContract() {
+function isValidTransactionContract(transactionJson) {
   if (
     !transactionJson.transaction ||
     !transactionJson.transaction.merchant ||

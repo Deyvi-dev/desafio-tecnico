@@ -1,20 +1,24 @@
 import * as utils from "./utils.js";
 import * as constants from "../../constants.js";
-
+import * as account from "../account/index.js"
 var transactionHistory = [];
 
 function execute(transactionJson) {
   let transactionData = transactionJson;
-
+  var  transactionERRO = {...account.accountData.account}
   if (utils.isValidTransactionContract(transactionJson)) {
-    if (!hasCreditCardLimit(transactionJson)) {
-      transactionData.violations.push(constants.ERROR_NOT_LIMIT);
+    console.log("ixxx")
+    if (!utils.hasCreditCardLimit(transactionJson)) {
+      console.log("ue", transactionERRO.violations)
+      transactionERRO.violations.push(constants.ERROR_NOT_LIMIT);
     } else {
-      if (isDoubledTransaction(transactionJson)) {
-        transactionData.violations.push(constants.ERROR_DOUBLED_TRANSACTION);
+      if (utils.isDoubledTransaction(transactionJson)) {
+        console.log('foi trueeeee::')
+        transactionERRO.violations.push(constants.ERROR_DOUBLED_TRANSACTION);
       } else {
-        transactionData.account["available-limit"] =
-          newCreditCardLimit(transactionJson);
+        console.log("ue2",account.accountData.account.account["available-limit"])
+        account.accountData.account.account["available-limit"] =
+          utils.newCreditCardLimit(transactionJson);
       }
     }
 
@@ -25,4 +29,4 @@ function execute(transactionJson) {
   }
 }
 
-export { execute, transactionHistory};
+export { execute, transactionHistory };

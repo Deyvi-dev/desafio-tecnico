@@ -12,10 +12,12 @@ function createAccount(accountJson) {
   }
 
   if (utils.isValidCreateContract(accountJson)) {
-    // if (!accountData.account["active-card"]) {
-    //   accountData.account.violations.push(constants.ERROR_CARD_NOT_ACTIVE);
-    //   return accountData.account;
-    // }
+    if(!accountData.account === null){
+      if (!accountData.account["active-card"]) {
+        accountData.account.violations.push(constants.ERROR_CARD_NOT_ACTIVE);
+        return accountData.account;
+      }
+    }
 
     accountData.status = true;
     accountJson.violations = [];
