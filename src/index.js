@@ -44,7 +44,7 @@ function answerUser(answer) {
 }
 
 function exitHandler() {
-  
+  console.log(history)
   console.log("obrigado");
   readerCLI.close();
 }
